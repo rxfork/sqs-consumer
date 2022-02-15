@@ -646,7 +646,7 @@ describe('Consumer', () => {
 
     });
 
-    it('extends visibility timeout for long running handler functions', async () => {
+    it('passes in the correctvisibility timeout for long running handler functions', async () => {
       consumer = new Consumer({
         queueUrl: QUEUE_URL,
         region: REGION,
@@ -665,13 +665,13 @@ describe('Consumer', () => {
       sandbox.assert.match(sqs.send.secondCall.args[0].input, sinon.match({
         QueueUrl: QUEUE_URL,
         ReceiptHandle: 'receipt-handle',
-        VisibilityTimeout: 70
+        VisibilityTimeout: 40
       }));
       sandbox.assert.calledWith(sqs.send.thirdCall, mockChangeMessageVisibility);
       sandbox.assert.match(sqs.send.thirdCall.args[0].input, sinon.match({
         QueueUrl: QUEUE_URL,
         ReceiptHandle: 'receipt-handle',
-        VisibilityTimeout: 100
+        VisibilityTimeout: 40
       }));
       sandbox.assert.calledOnce(clearIntervalSpy);
     });
@@ -703,18 +703,18 @@ describe('Consumer', () => {
       sandbox.assert.match(sqs.send.secondCall.args[0].input, sinon.match({
         QueueUrl: QUEUE_URL,
         Entries: sinon.match.array.deepEquals([
-          { Id: '1', ReceiptHandle: 'receipt-handle-1', VisibilityTimeout: 70 },
-          { Id: '2', ReceiptHandle: 'receipt-handle-2', VisibilityTimeout: 70 },
-          { Id: '3', ReceiptHandle: 'receipt-handle-3', VisibilityTimeout: 70 }
+          { Id: '1', ReceiptHandle: 'receipt-handle-1', VisibilityTimeout: 40 },
+          { Id: '2', ReceiptHandle: 'receipt-handle-2', VisibilityTimeout: 40 },
+          { Id: '3', ReceiptHandle: 'receipt-handle-3', VisibilityTimeout: 40 }
         ])
       }));
       sandbox.assert.calledWith(sqs.send.thirdCall, mockChangeMessageVisibilityBatch);
       sandbox.assert.match(sqs.send.thirdCall.args[0].input, sinon.match({
         QueueUrl: QUEUE_URL,
         Entries: [
-          { Id: '1', ReceiptHandle: 'receipt-handle-1', VisibilityTimeout: 100 },
-          { Id: '2', ReceiptHandle: 'receipt-handle-2', VisibilityTimeout: 100 },
-          { Id: '3', ReceiptHandle: 'receipt-handle-3', VisibilityTimeout: 100 }
+          { Id: '1', ReceiptHandle: 'receipt-handle-1', VisibilityTimeout: 40 },
+          { Id: '2', ReceiptHandle: 'receipt-handle-2', VisibilityTimeout: 40 },
+          { Id: '3', ReceiptHandle: 'receipt-handle-3', VisibilityTimeout: 40 }
         ]
       }));
       sandbox.assert.calledOnce(clearIntervalSpy);
