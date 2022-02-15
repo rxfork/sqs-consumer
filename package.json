@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "postversion": "git push --follow-tags",
     "build": "npm run clean && tsc",
     "watch": "tsc --watch",
     "clean": "rm -fr dist/*",
