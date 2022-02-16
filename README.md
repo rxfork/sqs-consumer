@@ -1,28 +1,26 @@
-# sqs-consumer
+# @rxfork/sqs-consumer
 
-[![NPM downloads](https://img.shields.io/npm/dm/sqs-consumer.svg?style=flat)](https://npmjs.org/package/sqs-consumer)
-[![Build Status](https://travis-ci.org/bbc/sqs-consumer.svg)](https://travis-ci.org/bbc/sqs-consumer) 
-[![Code Climate](https://codeclimate.com/github/BBC/sqs-consumer/badges/gpa.svg)](https://codeclimate.com/github/BBC/sqs-consumer) 
-[![Test Coverage](https://codeclimate.com/github/BBC/sqs-consumer/badges/coverage.svg)](https://codeclimate.com/github/BBC/sqs-consumer)
+[![NPM Version](https://img.shields.io/npm/v/@rxfork/sqs-consumer.svg?style=flat)](https://npmjs.org/package/@rxfork/sqs-consumer)
+[![main](https://github.com/rxfork/sqs-consumer/actions/workflows/main.yml/badge.svg)](https://github.com/rxfork/sqs-consumer/actions/workflows/main.yml)
 
 Build SQS-based applications without the boilerplate. Just define an async function that handles the SQS message processing.
 
 ## Installation
 
 ```bash
-npm add sqs-consumer
+npm add @rxfork/sqs-consumer
 ```
 
 Note: This library assumes you are using [AWS SDK v3](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/index.html). If you are using v2, please install v5.5.0:
 
 ```bash
-npm add sqs-consumer@5.5.0
+npm add @rxfork/sqs-consumer@5.5.0
 ```
 
 ## Usage
 
 ```js
-import { Consumer } from 'sqs-consumer';
+import { Consumer } from '@rxfork/sqs-consumer';
 
 const app = Consumer.create({
   queueUrl: 'https://sqs.eu-west-1.amazonaws.com/account-id/queue-name',
@@ -48,7 +46,7 @@ app.start();
 * By default messages are processed one at a time – a new message won't be received until the first one has been processed. To process messages in parallel, use the `batchSize` option [detailed below](#options).
 * If you need to add specific configuration options to the SQS client, you may pass an instantiated client to the Consumer constructor:
 ```js
-import { Consumer } from 'sqs-consumer';
+import { Consumer } from '@rxfork/sqs-consumer';
 import { SQSClient } from '@aws-sdk/client-sqs';
 
 const app = Consumer.create({
@@ -86,7 +84,7 @@ If you need to specify your credentials manually, you can use a pre-configured i
 
 
 ```js
-import { Consumer } from 'sqs-consumer';
+import { Consumer } from '@rxfork/sqs-consumer';
 import { SQSClient } from '@aws-sdk/client-sqs';
 import { fromIni } from '@aws-sdk/credential-provider-ini';
 
@@ -176,4 +174,4 @@ Consumer will receive and delete messages from the SQS queue. Ensure `sqs:Receiv
 
 
 ### Contributing 
-See contributing [guidelines](https://github.com/bbc/sqs-consumer/blob/master/.github/CONTRIBUTING.md).
+See contributing [guidelines](https://github.com/rxfork/sqs-consumer/blob/master/.github/CONTRIBUTING.md).
